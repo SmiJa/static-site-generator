@@ -28,8 +28,8 @@ class HTMLNode:
 
 
 class LeafNode(HTMLNode):
-  def __init__(self, tag, value, props):
-    super().__init__(self, tag, value, props)
+  def __init__(self, tag, value):
+    super().__init__(tag, value)
 
   def to_html(self):
     if self.value == "" or self.value == None:
@@ -38,8 +38,11 @@ class LeafNode(HTMLNode):
     if self.tag == None:
       return self.value
     
-    opening_tag = f"<{self.tag} {" " +self.props_to_html if self.props else ""}>"
+    opening_tag = f"<{self.tag}{' ' + self.props_to_html if self.props else ''}>"
     closing_tag = f"</{self.tag}>"
 
     final_html = f"{opening_tag}{self.value}{closing_tag}"
     return final_html
+  
+  def __repr__(self):
+    print(f"LeafNode({self.tag},{self.value},{self.props})")
